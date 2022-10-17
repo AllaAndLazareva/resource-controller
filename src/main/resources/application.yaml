@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:postgresql://localhost:5432/resources_controller
+    username: admin
+    password: 121911
+    driverClassName: org.postgresql.Driver
+    hikari:
+      schema: controller
