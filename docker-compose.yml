@@ -1,0 +1,14 @@
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "resources_controller"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: 121911
+    volumes:
+      - /private/var/lib/postgresql:/var/lib/postgresql
+      - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+    ports:
+      - "5432:5432"
