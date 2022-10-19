@@ -2,6 +2,7 @@ package com.lazareva.resourceController.jpa.entities;
 
 import lombok.Getter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -13,12 +14,15 @@ import javax.persistence.Table;
 public class VersionDataEntity
 {
     @Id
-    private String version_id;
+    private String id;
 
-    private String version;
+    @Column
+    @OneToOne
+    private VersionEntity version;
 
-    private String description;
-
+    @Column
     @OneToOne
     private ValueEntity value;
+
+
 }

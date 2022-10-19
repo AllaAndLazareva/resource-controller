@@ -6,14 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "value")
+@Table(name = "version")
 @Entity
 @Getter
-public class ValueEntity
+public class VersionEntity
 {
     @Id
-    private String key;
+    private String version;
 
-    private String data;
-
+    private String description;
 }
