@@ -8,6 +8,8 @@ public interface ApplicationProvider
 {
     List<ApplicationModel> getAll();
 
+    List<ApplicationModel> applicationsByRealmId(String realmId);
+
     ApplicationModel save(ApplicationModel model);
 
     void update(ApplicationModel model);

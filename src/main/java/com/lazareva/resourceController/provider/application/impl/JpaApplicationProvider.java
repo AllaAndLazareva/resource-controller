@@ -6,6 +6,7 @@ import com.lazareva.resourceController.mapper.BaseMapper;
 import com.lazareva.resourceController.model.ApplicationModel;
 import com.lazareva.resourceController.provider.application.ApplicationProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +30,14 @@ public class JpaApplicationProvider implements ApplicationProvider
     }
 
     @Override
+    public List<ApplicationModel> applicationsByRealmId(String realmId)
+    {
+        return applicationRepositories.getAllByRealmId(realmId).stream()
+                                      .map(mapper::toModel)
+                                      .collect(Collectors.toList());
+    }
+
+    @Override
     public ApplicationModel save(ApplicationModel model)
     {
         ApplicationEntity applicationEntity = mapper.toEntity(model);
@@ -40,6 +49,7 @@ public class JpaApplicationProvider implements ApplicationProvider
         return mapper.toModel(applicationRepositories.save(applicationEntity));
     }
 
+    @Async
     public void update(ApplicationModel model)
     {
         if (model.getId() == null)
