@@ -1,21 +1,21 @@
 package com.lazareva.resourceController.jpa.entities;
 
+
+
 import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name = "value")
+@Table(name = "version")
 @Entity
 @Getter
-public class ValueEntity
-{
+public class VersionEntity {
     @Id
-   private String id;
+    private String version;
 
-    private String data;
+    private String description;
 
 
 

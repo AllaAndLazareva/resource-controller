@@ -12,26 +12,33 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
 
-@Table(name = "resource")
+@Table(name = "resources")
 @Entity
 @Getter
 public class ResourceEntity
 {
     @Id
-    private String key;
+    private String resource_key; //1. пользователь вводит ключ
 
-    @ManyToMany
+    @OneToMany (mappedBy = "value") //2.пользватель вводит value (localhost:8080)
+    private List<VersionDataEntity> values;
+
+    @OneToMany (mappedBy = "version_id") //3. присваивается версия напр. 1.0
+    private List<VersionDataEntity> versions;
+
+    @OneToOne //4. устанавливается текущая версия
+    @JoinColumn(name = "current_version", referencedColumnName = "version")
+    private VersionDataEntity currentVersion;
+
+    @ManyToMany(mappedBy ="resources" )
     private List<ApplicationEntity> applications;
 
     @Column
-    @OneToMany
+    @OneToMany(mappedBy = "id")
     private List<ValueEntity> resources;
 
-    @OneToMany
-    private List<VersionDataEntity> versions;
 
-    @OneToOne
-    @JoinColumn(name = "current_version")
-    private VersionDataEntity currentVersion;
+
+
 
 }

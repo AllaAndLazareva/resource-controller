@@ -2,13 +2,7 @@ package com.lazareva.resourceController.jpa.entities;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 
@@ -24,10 +18,13 @@ public class ApplicationEntity
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "realm_id")
+    @JoinColumn(name = "realm_id", referencedColumnName = "realm_id")
     private RealmEntity realm;
 
     @Column
     @ManyToMany
+    @JoinTable(name = "application_resources",
+    joinColumns = @JoinColumn(name = "application_name"),
+    inverseJoinColumns = @JoinColumn(name = "resource_key"))
     private List<ResourceEntity> resources;
 }
