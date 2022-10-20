@@ -31,7 +31,7 @@ public class ApplicationController
     @PatchMapping("/{realmId}")
     public ResponseEntity<List<ApplicationModel>> getApplicationsByRealmId(@PathVariable("realmId") String realmId)
     {
-        return ResponseEntity.ok(provider.getAll());
+        return ResponseEntity.ok(provider.applicationsByRealmId(realmId));
     }
 
     @PostMapping
