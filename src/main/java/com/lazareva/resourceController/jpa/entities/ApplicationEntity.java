@@ -1,6 +1,8 @@
 package com.lazareva.resourceController.jpa.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,9 +21,13 @@ import java.util.List;
 @Entity
 @Table(name = "application")
 @Getter
+@Setter
+@NoArgsConstructor
 public class ApplicationEntity
 {
     @Id
+    private String id;
+
     private String name;
 
     @Column
