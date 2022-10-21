@@ -1,15 +1,11 @@
 package com.lazareva.resourceController.jpa.entities;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -18,23 +14,25 @@ import java.util.List;
 @Table(name = "resource")
 @Entity
 @Getter
-public class ResourceEntity
-{
+@Setter
+@NoArgsConstructor
+public class ResourceEntity {
     @Id
     private String id;
 
     /**
-     * Ключь к параметру не может быть пустым
+     * Ключ к параметру не может быть пустым
      * пример: reg_rec_host
      * По данному ключу будет выполниться запрос и получения параметра.
      */
-    @Column
+    @Column(name = "resource_key")    //1.пользователь вводит ключ
+    @NotNull
     private String key;
 
     /**
      * Скорее всего это го поля здесь не должно быть. Связь будет через кросс таблицу.
      */
-    @ManyToMany
+    @ManyToMany(mappedBy = "resources")
     private List<ApplicationEntity> applications;
 
     /**
@@ -46,11 +44,11 @@ public class ResourceEntity
      * но мы всегда сможем переключить на версию 1.0. т.к она не удаляется, а хранится в списке.
      */
     @Column
-    @OneToMany
-    private List<VersionDataEntity> values;
+    @OneToMany(mappedBy = "resource")
+    private List<VersionDataEntity> value;
 
     @OneToOne
-    @JoinColumn(name = "current_value")
+    @JoinColumn(name = "current_value", referencedColumnName = "id")
     private VersionDataEntity currentValue;
 
 }
