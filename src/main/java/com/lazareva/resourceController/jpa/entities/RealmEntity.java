@@ -2,12 +2,10 @@ package com.lazareva.resourceController.jpa.entities;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -20,14 +18,15 @@ import java.util.List;
 @Entity
 @Table(name = "realm")
 @Getter
+@Setter
+@NoArgsConstructor
 
-public class RealmEntity
-{
+public class RealmEntity {
     /**
      * Все id во всех классах должны быть UUID
      */
     @Id
-    @Column(name = "realm_id")
+    @Column(name = "id")
     private String id;
 
     @Column

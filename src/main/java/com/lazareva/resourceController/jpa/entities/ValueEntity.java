@@ -1,7 +1,10 @@
 package com.lazareva.resourceController.jpa.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,11 +12,16 @@ import javax.persistence.Table;
 @Table(name = "value")
 @Entity
 @Getter
-public class ValueEntity
-{
+@Setter
+@NoArgsConstructor
+public class ValueEntity {
     @Id
-    private String key;
+    @Column(name = "value_key")
+    private String value;
 
     private String data;
+
+
+
 
 }

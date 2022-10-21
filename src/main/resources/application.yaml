@@ -1,13 +1,13 @@
 spring:
   jpa:
-    database: POSTGRESQL
+    database: mysql
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
   datasource:
-    url: jdbc:postgresql://localhost:5432/resources_controller
-    username: admin
-    password: 121911
-    driverClassName: org.postgresql.Driver
+    url: jdbc:mysql://localhost:3306/resources_controller
+    username: root
+    password: 4785375f
+    driverClassName: com.mysql.cj.jdbc.Driver
     hikari:
       schema: controller

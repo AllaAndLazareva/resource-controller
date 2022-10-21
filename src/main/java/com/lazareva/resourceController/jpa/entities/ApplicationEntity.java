@@ -1,14 +1,10 @@
 package com.lazareva.resourceController.jpa.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 
@@ -19,24 +15,31 @@ import java.util.List;
 @Entity
 @Table(name = "application")
 @Getter
-public class ApplicationEntity
-{
+@Setter
+@NoArgsConstructor
+public class ApplicationEntity {
     @Id
+    private String id;
+
     private String name;
 
     @Column
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "realm_id")
+    @JoinColumn(name = "realm", referencedColumnName = "id")
     private RealmEntity realm;
 
     /**
      * Лист всех конфигурации которые есть у текущего приложения
+     *
      * @ManyToMany - т.к одной конфигурация может быть у разных приложений.
      * Связь в таблице должна быть через кросс таблицу.
      */
     @Column
     @ManyToMany
+    @JoinTable(name = "application_resources",
+            joinColumns = @JoinColumn(name = "application_id"),
+            inverseJoinColumns = @JoinColumn(name = "resources_id"))
     private List<ResourceEntity> resources;
 }
