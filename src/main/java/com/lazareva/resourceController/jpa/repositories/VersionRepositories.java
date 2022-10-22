@@ -12,5 +12,5 @@ public interface VersionRepositories extends JpaRepository<VersionEntity, String
 
     List<VersionEntity> getAllBy();
 
-  //  Optional<VersionEntity> getAllByVersion();
+    Optional<VersionEntity> getVersionEntityByVersion(String version);
 }

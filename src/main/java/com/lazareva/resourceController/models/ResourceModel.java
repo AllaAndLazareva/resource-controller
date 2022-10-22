@@ -1,6 +1,5 @@
-package com.lazareva.resourceController.jpa.models;
+package com.lazareva.resourceController.models;
 
-import com.lazareva.resourceController.jpa.entities.VersionDataEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

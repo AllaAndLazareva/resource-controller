@@ -1,4 +1,4 @@
-package com.lazareva.resourceController.jpa.models;
+package com.lazareva.resourceController.models;
 
 import lombok.Data;
 import lombok.Getter;

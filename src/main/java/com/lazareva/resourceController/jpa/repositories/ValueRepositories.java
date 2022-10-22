@@ -12,5 +12,5 @@ public interface ValueRepositories extends JpaRepository<ValueEntity, String> {
 
 List<ValueEntity> getAllBy ();
 
-Optional<ValueEntity> getAllByValue(String value);
+Optional<ValueEntity> getAllByValue(String valueKey);
 }

@@ -1,8 +1,8 @@
-package com.lazareva.resourceController.jpa.mapper.impl;
+package com.lazareva.resourceController.mapper.impl;
 
 import com.lazareva.resourceController.jpa.entities.VersionEntity;
-import com.lazareva.resourceController.jpa.mapper.BaseMapper;
-import com.lazareva.resourceController.jpa.models.VersionModel;
+import com.lazareva.resourceController.mapper.BaseMapper;
+import com.lazareva.resourceController.models.VersionModel;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
