@@ -1,8 +1,40 @@
 type Realm{
     id:ID!
-    name:String
     description: String
+    application:Application
 }
+type Application{
+    id: String!
+    name:String
+    description:String
+    realm: Realm
+    resources:[Resource]
+}
+type Resource{
+    id: String!
+    key:String
+    applications:[Application]
+    value:[VersionData]
+    currentValue: VersionData
+}
+
+type VersionData{
+    id:String!
+    version:Version
+    value:Value
+}
+type Value{
+    value:String!
+    data:String
+
+}
+
+type Version{
+    version:String
+    description:String
+}
+
+
 type Query{
-realm(Id:ID):Realm
+    realm(Id:ID):Realm
 }

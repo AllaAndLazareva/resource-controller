@@ -8,16 +8,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+/*@RestController
 @RequestMapping("/realm")
-@RequiredArgsConstructor
+@RequiredArgsConstructor*/
 public class RealmController {
-    private final RealmProvider realmProvider;
+    /*private final RealmProvider realmProvider;
 
     @GetMapping
     public ResponseEntity<List<RealmModel>> getAllBy() {
         return ResponseEntity.ok(realmProvider.getAllBy());
     }
+
+
 
     @GetMapping("{/appId}")
     public ResponseEntity<RealmModel> getRealmByApplicationId(@PathVariable("appId") String applicationId) {
@@ -38,5 +40,5 @@ public class RealmController {
     @PatchMapping
     public void update(@RequestBody RealmModel realmModel) {
         realmProvider.update(realmModel);
-    }
+    }*/
 }

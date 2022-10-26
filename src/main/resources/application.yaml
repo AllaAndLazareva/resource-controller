@@ -1,4 +1,6 @@
 spring:
+
+
   jpa:
     database: mysql
     show-sql: true
@@ -17,11 +19,4 @@ spring:
           # Enable or disable the introspection query. Disabling it puts your server in contravention of the GraphQL
           # specification and expectations of most clients, so use this option with caution
           introspection-enabled: true
-      graphql:
-        tools:
-          schema-location-pattern: '**/*.graphqls'
-        playground:
-          enabled: true
-        servlet:
-          max-query-depth: 5
-          exception-handlers-enabled: true
+
