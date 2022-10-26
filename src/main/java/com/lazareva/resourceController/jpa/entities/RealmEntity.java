@@ -1,9 +1,9 @@
 package com.lazareva.resourceController.jpa.entities;
 
 
-import lombok.Getter;
+import io.leangen.graphql.annotations.GraphQLQuery;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,8 +17,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "realm")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 
 public class RealmEntity {

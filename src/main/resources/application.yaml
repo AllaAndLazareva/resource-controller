@@ -11,3 +11,11 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     hikari:
       schema: controller
+      graphql:
+        tools:
+          schema-location-pattern: '**/*.graphqls'
+        playground:
+          enabled: true
+        servlet:
+          max-query-depth: 5
+          exception-handlers-enabled: true
