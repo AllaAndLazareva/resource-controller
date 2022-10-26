@@ -20,7 +20,7 @@ public class ValueController {
         return ResponseEntity.ok(valueProvider.getAllBy());
     }
 
-    @GetMapping("{/value}")
+    @GetMapping("/{value}")
     public ResponseEntity<ValueModel> getValueByValueKey(@PathVariable("/value") String valueKey){
         return ResponseEntity.ok(valueProvider.getAllByValue(valueKey));
     }

@@ -13,12 +13,12 @@ public class VersionDataController {
 
     private final VersionDataProvider versionDataProvider;
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<VersionDataModel> getVersionDataById(@PathVariable("/id") String id){
         return ResponseEntity.ok(versionDataProvider.getVersionDataById(id));
     }
 
-    @GetMapping("{/value}")
+    @GetMapping("/{value}")
     public ResponseEntity<VersionDataModel> getVersionDataByValue(@PathVariable("/value") String value){
         return ResponseEntity.ok(versionDataProvider.getVersionDataByValue(value));
     }

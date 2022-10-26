@@ -19,13 +19,13 @@ public class RealmController {
         return ResponseEntity.ok(realmProvider.getAllBy());
     }
 
-    @GetMapping("{/appId}")
+    @GetMapping("/{appId}")
     public ResponseEntity<RealmModel> getRealmByApplicationId(@PathVariable("appId") String applicationId) {
         return ResponseEntity.ok(realmProvider.getRealmModelByApplicationId(applicationId));
 
     }
 
-    @GetMapping("{/appName}")
+    @GetMapping("/{appName}")
     public ResponseEntity<RealmModel> getRealmByApplicationName(@PathVariable("appName") String applicationName) {
         return ResponseEntity.ok(realmProvider.getRealmModelByApplicationName(applicationName));
     }

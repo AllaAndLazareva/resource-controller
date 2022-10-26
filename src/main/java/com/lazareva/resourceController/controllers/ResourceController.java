@@ -15,22 +15,22 @@ public class ResourceController {
 
     private final ResourceProvider resourceProvider;
 
-    @GetMapping("{/appId}")
+    @GetMapping("/{appId}")
     public ResponseEntity<List<ResourceModel>> getResourceByApplicationId(@PathVariable("appId") String applicationId) {
         return ResponseEntity.ok(resourceProvider.getResourceByApplicationId(applicationId));
     }
 
-    @GetMapping("{/appName}")
+    @GetMapping("/{appName}")
     public ResponseEntity<List<ResourceModel>> getResourceByApplicationName(@PathVariable("appName") String applicationName) {
         return ResponseEntity.ok(resourceProvider.getResourceByApplicationName(applicationName));
     }
 
-    @GetMapping("{/current")
+    @GetMapping("/{current}")
     public ResponseEntity<ResourceModel> getResourceByCurrentValue(@PathVariable("current") String currentValue) {
         return ResponseEntity.ok(resourceProvider.getResourceByCurrentValue(currentValue));
     }
 
-    @GetMapping("{/value}")
+    @GetMapping("/{value}")
     public ResponseEntity<ResourceModel> getResourceByValue(@PathVariable("value") String value) {
         return ResponseEntity.ok(resourceProvider.getResourceByValue(value));
     }
