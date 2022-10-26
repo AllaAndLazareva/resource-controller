@@ -9,6 +9,8 @@ public interface RealmProvider {
 
     List<RealmModel> getAllBy();
 
+    public RealmModel getRealmModelById(String Id);
+
     RealmModel getRealmModelByApplicationId(String applicationId);
 
     RealmModel getRealmModelByApplicationName(String applicationName);

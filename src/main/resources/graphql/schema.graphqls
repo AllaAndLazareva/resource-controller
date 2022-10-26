@@ -1,0 +1,8 @@
+type Realm{
+    id:ID!
+    name:String
+    description: String
+}
+type Query{
+realm(Id:ID):Realm
+}
