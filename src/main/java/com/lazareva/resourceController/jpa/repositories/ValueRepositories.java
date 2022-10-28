@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ValueRepositories extends JpaRepository<ValueEntity, String> {
 
-List<ValueEntity> getAllBy ();
+    List<ValueEntity> getAllBy();
 
-Optional<ValueEntity> getAllByValue(String valueKey);
+    Optional<ValueEntity> getValueEntityByValue(String valueKey);
 }

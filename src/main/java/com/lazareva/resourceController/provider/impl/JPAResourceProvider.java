@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -19,6 +18,13 @@ public class JPAResourceProvider implements ResourceProvider {
 
     private final ResourceRepositories resourceRepositories;
     private final BaseMapper<ResourceEntity, ResourceModel> mapper;
+
+    @Override
+    public ResourceModel getResourceById(String id) {
+        ResourceEntity resourceEntity = resourceRepositories.getResourceEntityById(id)
+                .orElseThrow();
+        return mapper.toModel(resourceEntity);
+    }
 
     @Override
     public List<ResourceModel> getResourceByApplicationId(String applicationId) {
@@ -38,7 +44,7 @@ public class JPAResourceProvider implements ResourceProvider {
 
     @Override
     public ResourceModel getResourceByCurrentValue(String currentValue) {
-        ResourceEntity resourceEntity=resourceRepositories.getResourceEntityByCurrentValue(currentValue)
+        ResourceEntity resourceEntity = resourceRepositories.getResourceEntityByCurrentValueId(currentValue)
                 .orElseThrow();
 
         return mapper.toModel(resourceEntity);
@@ -46,16 +52,16 @@ public class JPAResourceProvider implements ResourceProvider {
 
     @Override
     public ResourceModel getResourceByValue(String value) {
-        ResourceEntity resourceEntity=resourceRepositories.getResourceEntityByValue(value)
+        ResourceEntity resourceEntity = resourceRepositories.getResourceEntityByValueId(value)
                 .orElseThrow();
         return mapper.toModel(resourceEntity);
     }
 
     @Override
     public ResourceModel save(ResourceModel resourceModel) {
-        ResourceEntity resourceEntity=mapper.toEntity(resourceModel);
-        if(resourceModel.getId()!=null){
-            throw new RuntimeException("Only new resource. Current resource has id "+ resourceModel.getId());
+        ResourceEntity resourceEntity = mapper.toEntity(resourceModel);
+        if (resourceModel.getId() != null) {
+            throw new RuntimeException("Only new resource. Current resource has id " + resourceModel.getId());
         }
         resourceEntity.setId(UUID.randomUUID().toString());
         return mapper.toModel(resourceRepositories.save(resourceEntity));
@@ -63,10 +69,10 @@ public class JPAResourceProvider implements ResourceProvider {
 
     @Override
     public void update(ResourceModel resourceModel) {
-        if(resourceModel.getId()==null){
+        if (resourceModel.getId() == null) {
             throw new RuntimeException("Only existing model. Current model doesn't have id.");
         }
-       resourceRepositories.save(mapper.toEntity(resourceModel));
+        resourceRepositories.save(mapper.toEntity(resourceModel));
 
     }
 }

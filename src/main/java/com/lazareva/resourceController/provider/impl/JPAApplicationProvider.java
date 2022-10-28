@@ -30,7 +30,7 @@ public class JPAApplicationProvider implements ApplicationProvider {
 
     @Override
     public List<ApplicationModel> getAllByRealmId(String realmId) {
-        return applicationRepositories.getAllByRealmId(realmId)
+        return applicationRepositories.findApplicationEntitiesByRealmId(realmId)
                 .stream()
                 .map(mapper::toModel)
                 .collect(Collectors.toList());

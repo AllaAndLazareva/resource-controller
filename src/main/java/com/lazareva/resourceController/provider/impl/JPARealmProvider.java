@@ -27,8 +27,15 @@ public class JPARealmProvider implements RealmProvider {
                 .collect(Collectors.toList());
     }
 
+    public RealmModel getRealmModelById(String id) {
+        RealmEntity realmEntity = realmRepositories.getRealmEntityById(id)
+                .orElseThrow();
+        return mapper.toModel(realmEntity);
+    }
+
+
     @Override
-    public RealmModel getRealmModelByApplicationId(String applicationId) {
+    public RealmModel getRealmModelByApplicationId(String applicationId) {  
         RealmEntity realmEntity = realmRepositories.getRealmEntityByApplicationsId(applicationId)
                 .orElseThrow();
         return mapper.toModel(realmEntity);

@@ -29,7 +29,7 @@ public class JPAValueProvider implements ValueProvider {
 
     @Override
     public ValueModel getAllByValue(String valueKey) {
-        ValueEntity valueEntity=valueRepositories.getAllByValue(valueKey)
+        ValueEntity valueEntity = valueRepositories.getValueEntityByValue(valueKey)
                 .orElseThrow();
         return mapper.toModel(valueEntity);
 
@@ -37,9 +37,9 @@ public class JPAValueProvider implements ValueProvider {
 
     @Override
     public ValueModel save(ValueModel valueModel) {
-        ValueEntity valueEntity=mapper.toEntity(valueModel);
-        if(valueModel.getValueKey()!=null){
-            throw new RuntimeException("Only new value. Current value has key "+valueModel.getValueKey());
+        ValueEntity valueEntity = mapper.toEntity(valueModel);
+        if (valueModel.getValueKey() != null) {
+            throw new RuntimeException("Only new value. Current value has key " + valueModel.getValueKey());
         }
         valueEntity.setValue(UUID.randomUUID().toString());
         return mapper.toModel(valueRepositories.save(valueEntity));
@@ -47,7 +47,7 @@ public class JPAValueProvider implements ValueProvider {
 
     @Async
     public void update(ValueModel valueModel) {
-        if(valueModel.getValueKey()==null){
+        if (valueModel.getValueKey() == null) {
             throw new RuntimeException("Only existing model. Current model doesn't have id.");
         }
         valueRepositories.save(mapper.toEntity(valueModel));

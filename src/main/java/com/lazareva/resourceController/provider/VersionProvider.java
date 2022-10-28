@@ -8,7 +8,7 @@ public interface VersionProvider {
 
     List<VersionModel> getAllBy();
 
-    VersionModel getVersionById (String versionId);
+    VersionModel getVersionById(String versionId);
 
     VersionModel save(VersionModel versionModel);
 

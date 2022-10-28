@@ -8,7 +8,7 @@ public interface ApplicationProvider {
 
     List<ApplicationModel> getAll();
 
-    List<ApplicationModel> getAllByRealmId (String realmId);
+    List<ApplicationModel> getAllByRealmId(String realmId);
 
     ApplicationModel save(ApplicationModel model);
 

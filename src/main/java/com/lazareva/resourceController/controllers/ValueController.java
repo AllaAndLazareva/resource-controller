@@ -16,22 +16,22 @@ public class ValueController {
     private final ValueProvider valueProvider;
 
     @GetMapping
-    public ResponseEntity<List<ValueModel>> getAll(){
+    public ResponseEntity<List<ValueModel>> getAll() {
         return ResponseEntity.ok(valueProvider.getAllBy());
     }
 
-    @GetMapping("/{value}")
-    public ResponseEntity<ValueModel> getValueByValueKey(@PathVariable("/value") String valueKey){
+    @GetMapping("/value/{value}")
+    public ResponseEntity<ValueModel> getValueByValueKey(@PathVariable("value") String valueKey) {
         return ResponseEntity.ok(valueProvider.getAllByValue(valueKey));
     }
 
     @PostMapping
-    public ResponseEntity<ValueModel> save(@RequestBody ValueModel valueModel){
+    public ResponseEntity<ValueModel> save(@RequestBody ValueModel valueModel) {
         return ResponseEntity.ok(valueProvider.save(valueModel));
     }
 
     @PatchMapping
-    public void update(@RequestBody ValueModel valueModel){
+    public void update(@RequestBody ValueModel valueModel) {
         valueProvider.update(valueModel);
     }
 }

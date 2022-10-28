@@ -24,12 +24,6 @@ public class JPAVersionDataProvider implements VersionDataProvider {
         return mapper.toModel(versionDataEntity);
     }
 
-    @Override
-    public VersionDataModel getVersionDataByValue(String value) {
-        VersionDataEntity versionDataEntity = versionDataRepositories.getVersionDataEntityByValue(value)
-                .orElseThrow();
-        return mapper.toModel(versionDataEntity);
-    }
 
     @Override
     public VersionDataModel save(VersionDataModel versionDataModel) {

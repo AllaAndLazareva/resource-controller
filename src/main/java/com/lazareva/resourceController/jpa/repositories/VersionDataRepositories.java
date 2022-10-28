@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 public interface VersionDataRepositories extends JpaRepository<VersionDataEntity, String> {
 
-    Optional<VersionDataEntity> getVersionDataEntityByValue(String valueKey);
 
     Optional<VersionDataEntity> getVersionDataEntityById(String id);
 

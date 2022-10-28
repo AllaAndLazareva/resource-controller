@@ -20,8 +20,8 @@ public class VersionController {
         return ResponseEntity.ok(versionProvider.getAllBy());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<VersionModel> getVersionById(@PathVariable("/id") String id) {
+    @GetMapping("/id/{id}")
+    public ResponseEntity<VersionModel> getVersionById(@PathVariable("id") String id) {
         return ResponseEntity.ok(versionProvider.getVersionById(id));
     }
 

@@ -29,16 +29,16 @@ public class JPAVersionProvider implements VersionProvider {
 
     @Override
     public VersionModel getVersionById(String versionId) {
-        VersionEntity versionEntity=versionRepositories.getVersionEntityByVersion(versionId)
+        VersionEntity versionEntity = versionRepositories.getVersionEntityByVersion(versionId)
                 .orElseThrow();
         return mapper.toModel(versionEntity);
     }
 
     @Override
     public VersionModel save(VersionModel versionModel) {
-        VersionEntity versionEntity=mapper.toEntity(versionModel);
-        if(versionModel.getVersionId()!=null){
-            throw new RuntimeException("Only new version. Current version has versionId " +versionModel.getVersionId());
+        VersionEntity versionEntity = mapper.toEntity(versionModel);
+        if (versionModel.getVersionId() != null) {
+            throw new RuntimeException("Only new version. Current version has versionId " + versionModel.getVersionId());
         }
         versionEntity.setVersion(UUID.randomUUID().toString());
         return mapper.toModel(versionRepositories.save(versionEntity));
@@ -46,7 +46,7 @@ public class JPAVersionProvider implements VersionProvider {
 
     @Async
     public void update(VersionModel versionModel) {
-        if(versionModel.getVersionId()==null){
+        if (versionModel.getVersionId() == null) {
             throw new RuntimeException("Only existing version. Current version doesn't have id.");
         }
         versionRepositories.save(mapper.toEntity(versionModel));

@@ -1,13 +1,14 @@
 package com.lazareva.resourceController.provider;
 
 import com.lazareva.resourceController.models.RealmModel;
-import org.hibernate.cache.spi.CacheTransactionSynchronization;
 
 import java.util.List;
 
 public interface RealmProvider {
 
     List<RealmModel> getAllBy();
+
+    RealmModel getRealmModelById(String id);
 
     RealmModel getRealmModelByApplicationId(String applicationId);
 
