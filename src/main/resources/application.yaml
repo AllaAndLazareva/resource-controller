@@ -1,9 +1,14 @@
 spring:
+
   jpa:
     database: mysql
     show-sql: true
     hibernate:
       ddl-auto: none
+      graphql:
+        graphiql:
+          enabled: true
+
   datasource:
     url: jdbc:mysql://localhost:3306/resources_controller
     username: root
@@ -13,4 +18,9 @@ spring:
       schema: controller
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
+
 enabled: true
+
+
+
+

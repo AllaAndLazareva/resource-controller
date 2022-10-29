@@ -1,0 +1,43 @@
+type Query{
+    realm(Id:ID):Realm
+
+}
+type Realm{
+    id:ID!
+    description: String
+
+}
+type Application{
+    id: String!
+    name:String
+    description: String
+    description:String
+    realm: Realm
+    resources:[Resource]
+}
+type Resource{
+    id: String!
+    key:String
+    applications:[Application]
+    value:[VersionData]
+    currentValue: VersionData
+}
+
+type VersionData{
+    id:String!
+    version:Version
+    value:Value
+}
+type Value{
+    value:String!
+    data:String
+
+}
+
+type Version{
+    version:String
+    description:String
+}
+
+
+
