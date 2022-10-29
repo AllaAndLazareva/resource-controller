@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="create-table-version_data" author="Lazareva">
+        <createTable tableName="version_data">
+            <column name="id" type="varchar(64)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="varchar(64)">
+                <constraints foreignKeyName="version_data_version_version_version_id" references="version(version_id)"/>
+            </column>
+            <column name="value" type="varchar(64)">
+                <constraints foreignKeyName="version_data_value_value_value_key" references="value(value_key)"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

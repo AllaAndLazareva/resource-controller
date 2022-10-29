@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="create-table-resource_version_data" author="Lazareva">
+        <createTable tableName="resource_versiondata">
+            <column name="resource_id" type="varchar(64)">
+                <constraints foreignKeyName="resource_versiondata_resource_id_resource_id" references="resource(id)"/>
+            </column>
+            <column name="value" type="varchar(64)">
+                <constraints foreignKeyName="resource_versiondata_value_version_data_id" references="version_data(id)"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

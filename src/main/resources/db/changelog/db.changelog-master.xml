@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <include file="db/v-1.0/db.create_table_realm.xml"/>
+    <include file="db/v-1.0/db.create_table_application.xml"/>
+    <include file="db/v-1.0/db.3.create_table_value.xml"/>
+    <include file="db/v-1.0/db.4.create_table_version.xml"/>
+    <include file="db/v-1.0/db.5.create_table_version_data.xml"/>
+    <include file="db/v-1.0/db.6.create_table_resource.xml"/>
+    <include file="db/v-1.0/db.7.create_table_application_resource.xml"/>
+    <include file="db/v-1.0/db.8.create_table_resource_version_data.xml"/>
+</databaseChangeLog>

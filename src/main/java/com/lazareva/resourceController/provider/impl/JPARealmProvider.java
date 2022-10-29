@@ -35,7 +35,7 @@ public class JPARealmProvider implements RealmProvider {
 
 
     @Override
-    public RealmModel getRealmModelByApplicationId(String applicationId) {  
+    public RealmModel getRealmModelByApplicationId(String applicationId) {
         RealmEntity realmEntity = realmRepositories.getRealmEntityByApplicationsId(applicationId)
                 .orElseThrow();
         return mapper.toModel(realmEntity);
