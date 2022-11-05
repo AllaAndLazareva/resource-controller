@@ -1,5 +1,7 @@
 package com.lazareva.resourceController.provider.impl;
 
+import com.graphql.model.Realm;
+import com.lazareva.resourceController.exceptions.RealmNotFoundException;
 import com.lazareva.resourceController.jpa.entities.RealmEntity;
 import com.lazareva.resourceController.jpa.repositories.RealmRepositories;
 import com.lazareva.resourceController.mapper.BaseMapper;
@@ -10,6 +12,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -18,6 +21,8 @@ import java.util.stream.Collectors;
 public class JPARealmProvider implements RealmProvider {
     private final RealmRepositories realmRepositories;
     private final BaseMapper<RealmEntity, RealmModel> mapper;
+
+    private final BaseMapper<RealmEntity, Realm> fullRealmMapper;
 
     @Override
     public List<RealmModel> getAllBy() {
@@ -28,7 +33,7 @@ public class JPARealmProvider implements RealmProvider {
     }
 
     public RealmModel getRealmModelById(String id) {
-        RealmEntity realmEntity = realmRepositories.getRealmEntityById(id)
+        RealmEntity realmEntity = realmRepositories.findById(id)
                 .orElseThrow();
         return mapper.toModel(realmEntity);
     }
@@ -67,5 +72,11 @@ public class JPARealmProvider implements RealmProvider {
         }
         realmRepositories.save(mapper.toEntity(realmModel));
 
+    }
+
+    @Override
+    public Realm realmById(String id) {
+        Optional<RealmEntity> realmResult = realmRepositories.findById(id);
+        return fullRealmMapper.toModel(realmResult.orElseThrow(RealmNotFoundException::new));
     }
 }

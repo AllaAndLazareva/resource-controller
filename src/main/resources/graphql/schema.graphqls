@@ -1,18 +1,17 @@
 type Query{
-    realm(Id:ID):Realm
+    realmById(id:ID):Realm
 
 }
 type Realm{
     id:ID!
     description: String
+    applications:[Application]
 
 }
 type Application{
     id: String!
     name:String
     description: String
-    description:String
-    realm: Realm
     resources:[Resource]
 }
 type Resource{
