@@ -3,6 +3,8 @@ package com.lazareva.resourceController.controllers;
 import com.lazareva.resourceController.models.RealmModel;
 import com.lazareva.resourceController.provider.RealmProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,4 +47,7 @@ public class RealmController {
     public void update(@RequestBody RealmModel realmModel) {
         realmProvider.update(realmModel);
     }
+
+
+
 }

@@ -9,7 +9,8 @@
     <changeSet id="create-table-application_resources" author="Lazareva">
         <createTable tableName="application_resources">
             <column name="application_id" type="varchar(64)">
-                <constraints foreignKeyName="application_resources_application_id_application_id" references="application(id)"/>
+                <constraints foreignKeyName="application_resources_application_id_application_id"
+                             references="application(id)"/>
             </column>
             <column name="resources_id" type="varchar(64)">
                 <constraints foreignKeyName="application_resources_resource_id_resource_id" references="resource(id)"/>

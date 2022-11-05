@@ -15,6 +15,6 @@
             <column name="current_value" type="varchar(64)">
                 <constraints foreignKeyName="resource_current_value_version_data_id" references="version_data(id)"/>
             </column>
-                   </createTable>
+        </createTable>
     </changeSet>
 </databaseChangeLog>
