@@ -1,16 +1,16 @@
 spring:
   jpa:
-    database: mysql
+    database: POSTGRESQL
     show-sql: true
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:mysql://localhost:3306/resources_controller
-    username: root
-    password: 4785375f
-    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/resources_controller
+    username: admin
+    password: 121911
+    driverClassName: org.postgresql.Driver
     hikari:
       schema: controller
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
-enabled: true
+    enabled: true
