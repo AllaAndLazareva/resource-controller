@@ -1,7 +1,5 @@
 package com.lazareva.resourceController.provider.impl;
 
-import com.graphql.model.Realm;
-import com.lazareva.resourceController.exceptions.RealmNotFoundException;
 import com.lazareva.resourceController.jpa.entities.RealmEntity;
 import com.lazareva.resourceController.jpa.repositories.RealmRepositories;
 import com.lazareva.resourceController.mapper.BaseMapper;
@@ -12,7 +10,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -22,11 +19,9 @@ public class JPARealmProvider implements RealmProvider {
     private final RealmRepositories realmRepositories;
     private final BaseMapper<RealmEntity, RealmModel> mapper;
 
-    private final BaseMapper<RealmEntity, Realm> fullRealmMapper;
-
     @Override
     public List<RealmModel> getAllBy() {
-        return realmRepositories.getAllBy()
+        return realmRepositories.findAll()
                 .stream()
                 .map(mapper::toModel)
                 .collect(Collectors.toList());
@@ -38,21 +33,13 @@ public class JPARealmProvider implements RealmProvider {
         return mapper.toModel(realmEntity);
     }
 
-
     @Override
     public RealmModel getRealmModelByApplicationId(String applicationId) {
         RealmEntity realmEntity = realmRepositories.getRealmEntityByApplicationsId(applicationId)
                 .orElseThrow();
         return mapper.toModel(realmEntity);
-
     }
 
-    @Override
-    public RealmModel getRealmModelByApplicationName(String applicationName) {
-        RealmEntity realmEntity = realmRepositories.getRealmEntityByApplicationsName(applicationName)
-                .orElseThrow();
-        return mapper.toModel(realmEntity);
-    }
 
     @Override
     public RealmModel save(RealmModel realmModel) {
@@ -61,8 +48,7 @@ public class JPARealmProvider implements RealmProvider {
             throw new RuntimeException("Only new realm. Current realm has id " + realmModel.getId());
         }
         realmEntity.setId(UUID.randomUUID().toString());
-
-        return mapper.toModel(realmEntity);
+        return mapper.toModel(realmRepositories.save(realmEntity));
     }
 
     @Async
@@ -71,12 +57,5 @@ public class JPARealmProvider implements RealmProvider {
             throw new RuntimeException("Only existing model. Current model doesn't have id.");
         }
         realmRepositories.save(mapper.toEntity(realmModel));
-
-    }
-
-    @Override
-    public Realm realmById(String id) {
-        Optional<RealmEntity> realmResult = realmRepositories.findById(id);
-        return fullRealmMapper.toModel(realmResult.orElseThrow(RealmNotFoundException::new));
     }
 }

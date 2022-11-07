@@ -17,4 +17,9 @@
 
         </createTable>
     </changeSet>
+    <changeSet id="add-column-to-realm-table" author="v_soykin">
+        <addColumn tableName="realm">
+            <column name="name" type="varchar2(10)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

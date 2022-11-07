@@ -32,6 +32,8 @@ public class RealmEntity {
     @Column
     private String description;
 
+    private String name;
+
     /**
      * Пример: приложения Экономическое судопроизводство, Административное судопроизводство.
      * Нужно связать так что бы таблица application хранила поле realm_id. Таблица realm не должна хранить никаких связей с application

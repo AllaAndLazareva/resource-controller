@@ -17,7 +17,7 @@ public class VersionDataEntity {
 
 
     @OneToOne
-    @JoinColumn(name = "version_id", referencedColumnName = "version_id")
+    @JoinColumn(name = "version", referencedColumnName = "version_id")
     private VersionEntity version;
 
 
@@ -26,11 +26,10 @@ public class VersionDataEntity {
     private ValueEntity value;
 
     @OneToOne(mappedBy = "currentValue")
-    @JoinColumn(name = "current_resource")
     private ResourceEntity currentResource;
 
 
-    @ManyToOne()
+    @ManyToOne
     @JoinTable(name = "resource_versiondata",
             joinColumns = @JoinColumn(name = "value"),
             inverseJoinColumns = @JoinColumn(name = "resource_id"))

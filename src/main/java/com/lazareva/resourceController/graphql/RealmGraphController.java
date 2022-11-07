@@ -1,22 +1,28 @@
 package com.lazareva.resourceController.graphql;
 
-import com.graphql.model.Realm;
-import com.lazareva.resourceController.models.RealmModel;
-import com.lazareva.resourceController.provider.RealmProvider;
+
+import com.lazareva.resourceController.jpa.entities.RealmEntity;
+import com.lazareva.resourceController.jpa.repositories.RealmRepositories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 
 @Controller
 @RequiredArgsConstructor
 public class RealmGraphController {
-    private final RealmProvider realmProvider;
+    private final RealmRepositories realmProvider;
 
     @QueryMapping
-    public Realm realmById(@Argument(name = "id") String id) {
-        return realmProvider.realmById(id);
+    public RealmEntity realmById(@Argument(name = "id") String id) {
+        return realmProvider.findById(id).get();
+    }
+
+    @QueryMapping
+    public List<RealmEntity> allRealms() {
+        return realmProvider.findAll();
     }
 }

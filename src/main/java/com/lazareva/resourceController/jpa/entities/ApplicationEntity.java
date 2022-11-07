@@ -1,8 +1,6 @@
 package com.lazareva.resourceController.jpa.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,13 +12,16 @@ import java.util.List;
  */
 @Entity
 @Table(name = "application")
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ApplicationEntity {
     @Id
+    @EqualsAndHashCode.Include
     private String id;
 
+    @Column
     private String name;
 
     @Column
@@ -28,14 +29,10 @@ public class ApplicationEntity {
 
     @ManyToOne
     @JoinColumn(name = "realm", referencedColumnName = "id")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private RealmEntity realm;
 
-    /**
-     * Лист всех конфигурации которые есть у текущего приложения
-     *
-     * @ManyToMany - т.к одной конфигурация может быть у разных приложений.
-     * Связь в таблице должна быть через кросс таблицу.
-     */
     @Column
     @ManyToMany
     @JoinTable(name = "application_resources",

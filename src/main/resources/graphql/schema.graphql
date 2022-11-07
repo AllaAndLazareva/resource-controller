@@ -1,0 +1,48 @@
+
+
+schema {
+    query: Query
+}
+
+type Application {
+    description: String
+    id: String!
+    name: String
+    resources: [Resource]
+}
+
+type Query {
+    allRealms: [Realm]
+    realmById(id: ID): Realm
+}
+
+type Realm {
+    applications: [Application]
+    description: String
+    name:String
+    id: ID!
+}
+
+type Resource {
+    applications: [Application]
+    currentValue: VersionData
+    id: String!
+    key: String
+    value: [VersionData]
+}
+
+type Value {
+    data: String
+    value: String!
+}
+
+type Version {
+    description: String
+    version: String
+}
+
+type VersionData {
+    id: String!
+    value: Value
+    version: Version
+}

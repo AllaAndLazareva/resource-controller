@@ -119,7 +119,7 @@
                         </goals>
                         <configuration>
                             <graphqlSchemaPaths>
-                                <graphqlSchemaPath>${project.basedir}/src/main/resources/graphql/schema.graphqls
+                                <graphqlSchemaPath>${project.basedir}/src/main/resources/graphql/schema.graphql
                                 </graphqlSchemaPath>
                             </graphqlSchemaPaths>
                             <outputDir>${project.build.directory}/generated-sources/graphql</outputDir>

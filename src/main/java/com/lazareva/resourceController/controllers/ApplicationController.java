@@ -25,9 +25,9 @@ public class ApplicationController {
         return ResponseEntity.ok(applicationProvider.getAllByRealmId(realmId));
     }
 
-    @PostMapping
-    public ResponseEntity<ApplicationModel> save(@RequestBody ApplicationModel applicationModel) {
-        return ResponseEntity.ok(applicationProvider.save(applicationModel));
+    @PostMapping(produces = {"application/json"})
+    public ResponseEntity<ApplicationModel> save(@RequestBody ApplicationModel app) {
+        return ResponseEntity.ok(applicationProvider.save(app));
     }
 
     @PatchMapping

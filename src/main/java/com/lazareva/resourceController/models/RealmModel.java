@@ -10,5 +10,6 @@ public class RealmModel implements Serializable {
 
     private String id;
     private String description;
+    private String name;
 
 }
