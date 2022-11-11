@@ -12,7 +12,6 @@ public interface RealmProvider {
 
     RealmModel getRealmModelByApplicationId(String applicationId);
 
-    RealmModel getRealmModelByApplicationName(String applicationName);
 
     RealmModel save(RealmModel realmModel);
 

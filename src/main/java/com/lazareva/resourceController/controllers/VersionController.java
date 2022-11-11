@@ -25,7 +25,7 @@ public class VersionController {
         return ResponseEntity.ok(versionProvider.getVersionById(id));
     }
 
-    @PostMapping
+    @PostMapping(produces = {"application/json"})
     public ResponseEntity<VersionModel> save(@RequestBody VersionModel versionModel) {
         return ResponseEntity.ok(versionProvider.save(versionModel));
     }

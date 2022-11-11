@@ -1,12 +1,13 @@
 package com.lazareva.resourceController.jpa.entities;
 
 import com.sun.istack.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Класс описывающий конкретную конфигурацию.
@@ -16,8 +17,13 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class ResourceEntity {
     @Id
+    @EqualsAndHashCode.Include
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Column(name = "id", unique = true)
     private String id;
 
     /**
@@ -33,6 +39,7 @@ public class ResourceEntity {
      * Скорее всего это го поля здесь не должно быть. Связь будет через кросс таблицу.
      */
     @ManyToMany(mappedBy = "resources")
+    @ToString.Exclude
     private List<ApplicationEntity> applications;
 
     /**
@@ -44,11 +51,25 @@ public class ResourceEntity {
      * но мы всегда сможем переключить на версию 1.0. т.к она не удаляется, а хранится в списке.
      */
     @Column
+    @ToString.Exclude
     @OneToMany(mappedBy = "resource")
     private List<VersionDataEntity> value;
 
     @OneToOne
+    @ToString.Exclude
     @JoinColumn(name = "current_value", referencedColumnName = "id")
     private VersionDataEntity currentValue;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ResourceEntity that = (ResourceEntity) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

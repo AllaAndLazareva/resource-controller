@@ -21,7 +21,7 @@ public class JPAValueProvider implements ValueProvider {
 
     @Override
     public List<ValueModel> getAllBy() {
-        return valueRepositories.getAllBy()
+        return valueRepositories.findAll()
                 .stream()
                 .map(mapper::toModel)
                 .collect(Collectors.toList());

@@ -21,7 +21,7 @@ public class JPARealmProvider implements RealmProvider {
 
     @Override
     public List<RealmModel> getAllBy() {
-        return realmRepositories.getAllBy()
+        return realmRepositories.findAll()
                 .stream()
                 .map(mapper::toModel)
                 .collect(Collectors.toList());
@@ -42,12 +42,6 @@ public class JPARealmProvider implements RealmProvider {
 
     }
 
-    @Override
-    public RealmModel getRealmModelByApplicationName(String applicationName) {
-        RealmEntity realmEntity = realmRepositories.getRealmEntityByApplicationsName(applicationName)
-                .orElseThrow();
-        return mapper.toModel(realmEntity);
-    }
 
     @Override
     public RealmModel save(RealmModel realmModel) {
@@ -57,7 +51,7 @@ public class JPARealmProvider implements RealmProvider {
         }
         realmEntity.setId(UUID.randomUUID().toString());
 
-        return mapper.toModel(realmEntity);
+        return mapper.toModel(realmRepositories.save(realmEntity));
     }
 
     @Async

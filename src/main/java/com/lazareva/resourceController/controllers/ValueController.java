@@ -25,7 +25,7 @@ public class ValueController {
         return ResponseEntity.ok(valueProvider.getAllByValue(valueKey));
     }
 
-    @PostMapping
+    @PostMapping(produces = {"application/json"})
     public ResponseEntity<ValueModel> save(@RequestBody ValueModel valueModel) {
         return ResponseEntity.ok(valueProvider.save(valueModel));
     }

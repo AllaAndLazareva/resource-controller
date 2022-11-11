@@ -1,12 +1,13 @@
 package com.lazareva.resourceController.jpa.entities;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Данный класс будет хранить и связывать приложения в одном окружении
@@ -20,17 +21,22 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@ToString
 public class RealmEntity {
     /**
      * Все id во всех классах должны быть UUID
      */
     @Id
-    @Column(name = "id")
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Column(name = "id", unique = true)
+    @EqualsAndHashCode.Include
     private String id;
 
     @Column
     private String description;
+    @Column
+    private String name;
 
     /**
      * Пример: приложения Экономическое судопроизводство, Административное судопроизводство.
@@ -40,5 +46,17 @@ public class RealmEntity {
     @Column
     private List<ApplicationEntity> applications;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        RealmEntity that = (RealmEntity) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
 

@@ -19,7 +19,7 @@ public class VersionDataController {
     }
 
 
-    @PostMapping
+    @PostMapping(produces = {"application/json"})
     public ResponseEntity<VersionDataModel> save(@RequestBody VersionDataModel versionDataModel) {
         return ResponseEntity.ok(versionDataProvider.save(versionDataModel));
     }
