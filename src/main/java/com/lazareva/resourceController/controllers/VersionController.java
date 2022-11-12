@@ -15,15 +15,6 @@ public class VersionController {
 
     private final VersionProvider versionProvider;
 
-    @GetMapping
-    public ResponseEntity<List<VersionModel>> getAll() {
-        return ResponseEntity.ok(versionProvider.getAllBy());
-    }
-
-    @GetMapping("/id/{id}")
-    public ResponseEntity<VersionModel> getVersionById(@PathVariable("id") String id) {
-        return ResponseEntity.ok(versionProvider.getVersionById(id));
-    }
 
     @PostMapping
     public ResponseEntity<VersionModel> save(@RequestBody VersionModel versionModel) {

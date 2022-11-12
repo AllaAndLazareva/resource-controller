@@ -16,7 +16,7 @@ public abstract class ApplicationMapper implements BaseMapper<ApplicationEntity,
     @Autowired
     private RealmRepositories repositories;
 
-    @Mapping(target = "realm", expression = "java(getRepositories().findById(applicationModel.getRealmId()).get())")
+    @Mapping(target = "realm", expression = "java(getRepositories().getReferenceById(applicationModel.getRealmId()))")
     public abstract ApplicationEntity toEntity(ApplicationModel applicationModel);
 
     @Mapping(target = "realmId", source = "realm.id")

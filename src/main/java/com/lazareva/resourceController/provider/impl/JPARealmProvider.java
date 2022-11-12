@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -20,26 +21,12 @@ public class JPARealmProvider implements RealmProvider {
     private final BaseMapper<RealmEntity, RealmModel> mapper;
 
     @Override
-    public List<RealmModel> getAllBy() {
+    public List<RealmModel> allRealms() {
         return realmRepositories.findAll()
                 .stream()
                 .map(mapper::toModel)
                 .collect(Collectors.toList());
     }
-
-    public RealmModel getRealmModelById(String id) {
-        RealmEntity realmEntity = realmRepositories.findById(id)
-                .orElseThrow();
-        return mapper.toModel(realmEntity);
-    }
-
-    @Override
-    public RealmModel getRealmModelByApplicationId(String applicationId) {
-        RealmEntity realmEntity = realmRepositories.getRealmEntityByApplicationsId(applicationId)
-                .orElseThrow();
-        return mapper.toModel(realmEntity);
-    }
-
 
     @Override
     public RealmModel save(RealmModel realmModel) {

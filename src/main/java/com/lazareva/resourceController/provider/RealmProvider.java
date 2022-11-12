@@ -6,12 +6,7 @@ import java.util.List;
 
 public interface RealmProvider {
 
-    List<RealmModel> getAllBy();
-
-    RealmModel getRealmModelById(String id);
-
-    RealmModel getRealmModelByApplicationId(String applicationId);
-
+    List<RealmModel> allRealms();
 
     RealmModel save(RealmModel realmModel);
 

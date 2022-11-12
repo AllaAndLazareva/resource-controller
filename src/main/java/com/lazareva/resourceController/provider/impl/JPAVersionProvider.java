@@ -1,6 +1,8 @@
 package com.lazareva.resourceController.provider.impl;
 
+import com.lazareva.resourceController.jpa.entities.ApplicationEntity;
 import com.lazareva.resourceController.jpa.entities.VersionEntity;
+import com.lazareva.resourceController.jpa.repositories.ApplicationRepositories;
 import com.lazareva.resourceController.jpa.repositories.VersionRepositories;
 import com.lazareva.resourceController.mapper.BaseMapper;
 import com.lazareva.resourceController.models.VersionModel;
@@ -9,9 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.transaction.Transactional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,23 +20,13 @@ public class JPAVersionProvider implements VersionProvider {
     private final VersionRepositories versionRepositories;
     private final BaseMapper<VersionEntity, VersionModel> mapper;
 
-    @Override
-    public List<VersionModel> getAllBy() {
-        return versionRepositories.getAllBy()
-                .stream()
-                .map(mapper::toModel)
-                .collect(Collectors.toList());
-    }
+    private final ApplicationRepositories applicationRepositories;
 
     @Override
-    public VersionModel getVersionById(String versionId) {
-        VersionEntity versionEntity = versionRepositories.getVersionEntityByVersion(versionId)
-                .orElseThrow();
-        return mapper.toModel(versionEntity);
-    }
-
-    @Override
+    @Transactional
     public VersionModel save(VersionModel versionModel) {
+        ApplicationEntity applicationEntity = applicationRepositories.getReferenceById(versionModel.getApplicationId());
+        applicationEntity.getResources().stream().filter(resourceEntity -> resourceEntity.getKey().equals(versionModel.getResourceId()));
         VersionEntity versionEntity = mapper.toEntity(versionModel);
         if (versionModel.getVersionId() != null) {
             throw new RuntimeException("Only new version. Current version has versionId " + versionModel.getVersionId());

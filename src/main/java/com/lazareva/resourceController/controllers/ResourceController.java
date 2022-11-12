@@ -20,9 +20,14 @@ public class ResourceController {
         return ResponseEntity.ok(resourceProvider.getResourceById(id));
     }
 
-    @GetMapping("/appId/{appId}")
+    @GetMapping("/app/{appId}")
     public ResponseEntity<List<ResourceModel>> getResourceByApplicationId(@PathVariable("appId") String applicationId) {
         return ResponseEntity.ok(resourceProvider.getResourceByApplicationId(applicationId));
+    }
+
+    @PutMapping
+    public void addResources(ResourceDataContainer resource) {
+
     }
 
     @GetMapping("/appName/{appName}")
