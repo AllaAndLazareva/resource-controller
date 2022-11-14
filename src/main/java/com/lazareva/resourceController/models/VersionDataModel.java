@@ -9,6 +9,6 @@ import java.io.Serializable;
 public class VersionDataModel implements Serializable {
 
     private String id;
-    private VersionModel version;
-    private ValueModel value;
+    private String versionId;
+    private String valueKey;
 }

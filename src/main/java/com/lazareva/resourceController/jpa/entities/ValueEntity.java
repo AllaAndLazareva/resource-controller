@@ -23,8 +23,7 @@ public class ValueEntity {
 
     private String data;
 
-    @OneToOne(mappedBy = "value")
-    private VersionDataEntity versionData;
+
 
     @Override
     public boolean equals(Object o) {

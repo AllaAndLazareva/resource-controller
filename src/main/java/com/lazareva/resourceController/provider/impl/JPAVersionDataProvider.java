@@ -1,9 +1,12 @@
 package com.lazareva.resourceController.provider.impl;
 
 import com.lazareva.resourceController.jpa.entities.VersionDataEntity;
+import com.lazareva.resourceController.jpa.entities.VersionEntity;
 import com.lazareva.resourceController.jpa.repositories.VersionDataRepositories;
+import com.lazareva.resourceController.jpa.repositories.VersionRepositories;
 import com.lazareva.resourceController.mapper.BaseMapper;
 import com.lazareva.resourceController.models.VersionDataModel;
+import com.lazareva.resourceController.models.VersionModel;
 import com.lazareva.resourceController.provider.VersionDataProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
@@ -15,6 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class JPAVersionDataProvider implements VersionDataProvider {
     private final VersionDataRepositories versionDataRepositories;
+    private final VersionRepositories versionRepositories;
     private final BaseMapper<VersionDataEntity, VersionDataModel> mapper;
 
     @Override
@@ -27,11 +31,13 @@ public class JPAVersionDataProvider implements VersionDataProvider {
 
     @Override
     public VersionDataModel save(VersionDataModel versionDataModel) {
-        VersionDataEntity versionDataEntity = mapper.toEntity(versionDataModel);
+
+       VersionDataEntity versionDataEntity = mapper.toEntity(versionDataModel);
         if (versionDataModel.getId() != null) {
             throw new RuntimeException("Only new versionData. Current versionData has id " + versionDataModel.getId());
         }
         versionDataEntity.setId(UUID.randomUUID().toString());
+
         return mapper.toModel(versionDataRepositories.save(versionDataEntity));
     }
 
