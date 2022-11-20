@@ -10,6 +10,8 @@ import java.io.Serializable;
 public class ResourceModel implements Serializable {
 
     private String id;
+    private String applicationId;
+    private String versionDataId;
     private String resourceKey;
-    private VersionDataModel currentValue;
+    private String resourceValue;
 }

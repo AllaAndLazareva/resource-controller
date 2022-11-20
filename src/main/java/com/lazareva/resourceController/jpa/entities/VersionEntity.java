@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Table(name = "version")
 @Entity
@@ -17,8 +20,4 @@ public class VersionEntity {
     private String version;
 
     private String description;
-
-    @OneToOne(mappedBy = "version")
-    private VersionDataEntity versionData;
-
 }
