@@ -30,7 +30,7 @@ public class ResourceController {
         return ResponseEntity.ok(resourceProvider.getResourceByApplicationName(applicationName));
     }
 
-    @GetMapping("/current/{current}")
+ /*   @GetMapping("/current/{current}")
     public ResponseEntity<ResourceModel> getResourceByCurrentValue(@PathVariable("current") String currentValue) {
         return ResponseEntity.ok(resourceProvider.getResourceByCurrentValue(currentValue));
     }
@@ -39,7 +39,7 @@ public class ResourceController {
     public ResponseEntity<ResourceModel> getResourceByValue(@PathVariable("value") String value) {
         return ResponseEntity.ok(resourceProvider.getResourceByValue(value));
     }
-
+*/
     @PostMapping
     public ResponseEntity<ResourceModel> save(@RequestBody ResourceModel resourceModel) {
         return ResponseEntity.ok(resourceProvider.save(resourceModel));

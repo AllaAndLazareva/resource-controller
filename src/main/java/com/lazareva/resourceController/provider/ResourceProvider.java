@@ -12,9 +12,9 @@ public interface ResourceProvider {
 
     List<ResourceModel> getResourceByApplicationName(String applicationName);
 
-    ResourceModel getResourceByCurrentValue(String currentValue);
+   /* ResourceModel getResourceByCurrentValue(String currentValue);
 
-    ResourceModel getResourceByValue(String value);
+    ResourceModel getResourceByValue(String value);*/
 
     ResourceModel save(ResourceModel resourceModel);
 

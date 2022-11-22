@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-
+<!--
     <changeSet id="create-table-resource_version_data" author="Lazareva">
         <createTable tableName="resource_versiondata">
             <column name="resource_id" type="varchar(64)">
@@ -16,7 +16,7 @@
             </column>
 
         </createTable>
-    </changeSet>
+    </changeSet> -->
     <changeSet id="add-column-to-realm-table" author="v_soykin">
         <addColumn tableName="realm">
             <column name="name" type="varchar2(10)"/>

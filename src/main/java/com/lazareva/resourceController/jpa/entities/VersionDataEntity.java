@@ -34,16 +34,17 @@ public class VersionDataEntity {
     private ValueEntity value;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "currentValue")
-    private ResourceEntity currentResource;
+   // @OneToOne(mappedBy = "currentValue")
+   // private ResourceEntity currentResource;
+    private String currentResource;
 
-
-    @ManyToOne
+    //@ManyToOne
     @ToString.Exclude
-    @JoinTable(name = "resource_versiondata",
+    /*@JoinTable(name = "resource_versiondata",
             joinColumns = @JoinColumn(name = "value"),
             inverseJoinColumns = @JoinColumn(name = "resource_id"))
-    private ResourceEntity resource;
+    private ResourceEntity resource;*/
+    private String resource;
 
     @Override
     public boolean equals(Object o) {

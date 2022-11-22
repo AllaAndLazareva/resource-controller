@@ -20,11 +20,11 @@ public interface ResourceRepositories extends JpaRepository<ResourceEntity, Stri
     @Query("select r from ResourceEntity r inner join r.applications applications where applications.name = ?1")
     List<ResourceEntity> getResourceEntitiesByApplicationsName(String applicationName);
 
-    @Query("select r from ResourceEntity r inner join r.currentValue versionData where versionData.id = ?1")
+   /* @Query("select r from ResourceEntity r inner join r.currentValue versionData where versionData.id = ?1")
     Optional<ResourceEntity> getResourceEntityByCurrentValueId(String currentValue);
 
     @Query("select r from ResourceEntity r inner join r.value versionData where versionData.id = ?1")
-    Optional<ResourceEntity> getResourceEntityByValueId(String value);
+    Optional<ResourceEntity> getResourceEntityByValueId(String value);*/
 
 
 }

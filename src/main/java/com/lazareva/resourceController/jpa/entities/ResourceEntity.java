@@ -6,6 +6,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,13 +53,15 @@ public class ResourceEntity {
      */
     @Column
     @ToString.Exclude
-    @OneToMany(mappedBy = "resource")
-    private List<VersionDataEntity> value;
+    //@OneToMany(mappedBy = "resource")
+   //private List<VersionDataEntity> value;
+    private String versionDataValue;            //Здесь должна быть коллекция, но компилятор не принимает её
 
-    @OneToOne
+   // @OneToOne
     @ToString.Exclude
-    @JoinColumn(name = "current_value", referencedColumnName = "id")
-    private VersionDataEntity currentValue;
+    //@JoinColumn(name = "current_value", referencedColumnName = "id")
+   //private VersionDataEntity currentValue;
+    private String VersionDataCurrentValue;
 
     @Override
     public boolean equals(Object o) {

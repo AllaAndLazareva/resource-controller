@@ -42,7 +42,7 @@ public class JPAResourceProvider implements ResourceProvider {
                 .collect(Collectors.toList());
     }
 
-    @Override
+  /*  @Override
     public ResourceModel getResourceByCurrentValue(String currentValue) {
         ResourceEntity resourceEntity = resourceRepositories.getResourceEntityByCurrentValueId(currentValue)
                 .orElseThrow();
@@ -55,7 +55,7 @@ public class JPAResourceProvider implements ResourceProvider {
         ResourceEntity resourceEntity = resourceRepositories.getResourceEntityByValueId(value)
                 .orElseThrow();
         return mapper.toModel(resourceEntity);
-    }
+    }*/
 
     @Override
     public ResourceModel save(ResourceModel resourceModel) {

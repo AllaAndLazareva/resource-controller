@@ -12,9 +12,7 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="resource_key" type="varchar(64)"/>
-            <column name="current_value" type="varchar(64)">
-                <constraints foreignKeyName="resource_current_value_version_data_id" references="version_data(id)"/>
-            </column>
+            <column name="current_value" type="varchar(64)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
