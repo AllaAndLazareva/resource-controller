@@ -19,6 +19,10 @@ public class VersionEntity {
     @EqualsAndHashCode.Include
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String id;
+
+    @EqualsAndHashCode.Include
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "version_id", unique = true)
     private String version;
 
