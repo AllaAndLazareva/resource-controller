@@ -11,12 +11,6 @@ import java.util.List;
 @Repository
 public interface ApplicationRepositories extends JpaRepository<ApplicationEntity, String> {
 
-
-    @Query("select a from ApplicationEntity a")
-    @EntityGraph(attributePaths = {"resources.currentValue"})
-    List<ApplicationEntity> getAllBy();
-
-
     @EntityGraph(attributePaths = {"resources.currentValue"})
     List<ApplicationEntity> findApplicationEntitiesByRealmId(String realmId);
 

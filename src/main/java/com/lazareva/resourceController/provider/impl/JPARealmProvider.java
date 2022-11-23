@@ -20,28 +20,12 @@ public class JPARealmProvider implements RealmProvider {
     private final BaseMapper<RealmEntity, RealmModel> mapper;
 
     @Override
-    public List<RealmModel> getAllBy() {
+    public List<RealmModel> allRealms() {
         return realmRepositories.findAll()
                 .stream()
                 .map(mapper::toModel)
                 .collect(Collectors.toList());
     }
-
-    public RealmModel getRealmModelById(String id) {
-        RealmEntity realmEntity = realmRepositories.getRealmEntityById(id)
-                .orElseThrow();
-        return mapper.toModel(realmEntity);
-    }
-
-
-    @Override
-    public RealmModel getRealmModelByApplicationId(String applicationId) {
-        RealmEntity realmEntity = realmRepositories.getRealmEntityByApplicationsId(applicationId)
-                .orElseThrow();
-        return mapper.toModel(realmEntity);
-
-    }
-
 
     @Override
     public RealmModel save(RealmModel realmModel) {
@@ -50,7 +34,6 @@ public class JPARealmProvider implements RealmProvider {
             throw new RuntimeException("Only new realm. Current realm has id " + realmModel.getId());
         }
         realmEntity.setId(UUID.randomUUID().toString());
-
         return mapper.toModel(realmRepositories.save(realmEntity));
     }
 
@@ -60,6 +43,5 @@ public class JPARealmProvider implements RealmProvider {
             throw new RuntimeException("Only existing model. Current model doesn't have id.");
         }
         realmRepositories.save(mapper.toEntity(realmModel));
-
     }
 }

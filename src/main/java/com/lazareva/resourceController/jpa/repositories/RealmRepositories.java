@@ -12,8 +12,6 @@ import java.util.Optional;
 public interface RealmRepositories extends JpaRepository<RealmEntity, String> {
 
     @Deprecated
-    Optional<RealmEntity> getRealmEntityById(String id);
-
     @Query("select r from RealmEntity r inner join r.applications applications where applications.id = ?1")
     Optional<RealmEntity> getRealmEntityByApplicationsId(String applicationId);
 }

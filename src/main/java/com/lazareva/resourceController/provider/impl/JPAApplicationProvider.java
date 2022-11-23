@@ -21,14 +21,6 @@ public class JPAApplicationProvider implements ApplicationProvider {
     private final BaseMapper<ApplicationEntity, ApplicationModel> mapper;
 
     @Override
-    public List<ApplicationModel> getAll() {
-        return applicationRepositories.getAllBy()
-                .stream()
-                .map(mapper::toModel)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<ApplicationModel> getAllByRealmId(String realmId) {
         return applicationRepositories.findApplicationEntitiesByRealmId(realmId)
                 .stream()
@@ -39,11 +31,9 @@ public class JPAApplicationProvider implements ApplicationProvider {
     @Override
     public ApplicationModel save(ApplicationModel model) {
         ApplicationEntity applicationEntity = mapper.toEntity(model);
-        if (model.getId() != null) {
-            throw new RuntimeException("Only new model. Current model has id " + model.getId());
+        if (model.getId() == null) {
+            applicationEntity.setId(UUID.randomUUID().toString());
         }
-        applicationEntity.setId(UUID.randomUUID().toString());
-
         return mapper.toModel(applicationRepositories.save(applicationEntity));
     }
 
