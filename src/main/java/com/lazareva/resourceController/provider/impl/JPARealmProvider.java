@@ -33,7 +33,7 @@ public class JPARealmProvider implements RealmProvider {
         if (realmModel.getId() != null) {
             throw new RuntimeException("Only new realm. Current realm has id " + realmModel.getId());
         }
-        realmEntity.setId(UUID.randomUUID().toString());
+
         return mapper.toModel(realmRepositories.save(realmEntity));
     }
 

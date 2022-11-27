@@ -40,7 +40,7 @@ public class JPAVersionProvider implements VersionProvider {
         if (versionModel.getVersionId() != null) {
             throw new RuntimeException("Only new version. Current version has versionId " + versionModel.getVersionId());
         }
-        versionEntity.setVersion(UUID.randomUUID().toString());
+    //    versionEntity.setVersion(UUID.randomUUID().toString()); Нам нужно как-то устанавливать версию....????
         return mapper.toModel(versionRepositories.save(versionEntity));
     }
 

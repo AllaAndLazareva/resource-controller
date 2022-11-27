@@ -31,9 +31,6 @@ public class JPAApplicationProvider implements ApplicationProvider {
     @Override
     public ApplicationModel save(ApplicationModel model) {
         ApplicationEntity applicationEntity = mapper.toEntity(model);
-        if (model.getId() == null) {
-            applicationEntity.setId(UUID.randomUUID().toString());
-        }
         return mapper.toModel(applicationRepositories.save(applicationEntity));
     }
 

@@ -41,7 +41,7 @@ public class JPAValueProvider implements ValueProvider {
         if (valueModel.getValueKey() != null) {
             throw new RuntimeException("Only new value. Current value has key " + valueModel.getValueKey());
         }
-        valueEntity.setValue(UUID.randomUUID().toString());
+
         return mapper.toModel(valueRepositories.save(valueEntity));
     }
 

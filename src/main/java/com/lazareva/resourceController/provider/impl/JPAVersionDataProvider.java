@@ -36,7 +36,7 @@ public class JPAVersionDataProvider implements VersionDataProvider {
         if (versionDataModel.getId() != null) {
             throw new RuntimeException("Only new versionData. Current versionData has id " + versionDataModel.getId());
         }
-        versionDataEntity.setId(UUID.randomUUID().toString());
+
 
         return mapper.toModel(versionDataRepositories.save(versionDataEntity));
     }

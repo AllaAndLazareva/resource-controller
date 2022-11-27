@@ -21,6 +21,7 @@ public class ValueEntity {
     @Column(name = "value_key", unique = true)
     private String value;
 
+
     private String data;
 
 

@@ -63,7 +63,7 @@ public class JPAResourceProvider implements ResourceProvider {
         if (resourceModel.getId() != null) {
             throw new RuntimeException("Only new resource. Current resource has id " + resourceModel.getId());
         }
-        resourceEntity.setId(UUID.randomUUID().toString());
+
         return mapper.toModel(resourceRepositories.save(resourceEntity));
     }
 
