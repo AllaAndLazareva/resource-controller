@@ -2,6 +2,8 @@ package com.lazareva.resourceController.jpa.entities;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -61,18 +63,21 @@ public class ResourceEntity {
     @ToString.Exclude
     //@JoinColumn(name = "current_value", referencedColumnName = "id")
    //private VersionDataEntity currentValue;
-    private String VersionDataCurrentValue;
+    private String versionDataCurrentValue;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+
+        if (!(o instanceof ResourceEntity)) return false;
+
         ResourceEntity that = (ResourceEntity) o;
-        return id != null && Objects.equals(id, that.id);
+
+        return new EqualsBuilder().append(getId(), that.getId()).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return new HashCodeBuilder(17, 37).append(getId()).toHashCode();
     }
 }

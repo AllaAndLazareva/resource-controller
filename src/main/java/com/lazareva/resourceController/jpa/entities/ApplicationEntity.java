@@ -1,6 +1,8 @@
 package com.lazareva.resourceController.jpa.entities;
 
 import lombok.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -45,16 +47,20 @@ public class ApplicationEntity {
             inverseJoinColumns = @JoinColumn(name = "resources_id"))
     private List<ResourceEntity> resources;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+
+        if (!(o instanceof ApplicationEntity)) return false;
+
         ApplicationEntity that = (ApplicationEntity) o;
-        return id != null && Objects.equals(id, that.id);
+
+        return new EqualsBuilder().append(getId(), that.getId()).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return new HashCodeBuilder(17, 37).append(getId()).toHashCode();
     }
 }
