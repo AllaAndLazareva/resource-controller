@@ -15,7 +15,7 @@ public class ApplicationController {
 
     private final ApplicationProvider applicationProvider;
 
-    @GetMapping("/{realmId}")
+    @GetMapping(value = "/{realmId}",produces = {"application/json"})
     public ResponseEntity<List<ApplicationModel>> getApplicationsByRealmId(@PathVariable("realmId") String realmId) {
         return ResponseEntity.ok(applicationProvider.getAllByRealmId(realmId));
     }

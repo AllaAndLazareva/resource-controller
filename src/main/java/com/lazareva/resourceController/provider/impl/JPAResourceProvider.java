@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,9 +20,7 @@ public class JPAResourceProvider implements ResourceProvider {
 
     @Override
     public ResourceModel getResourceById(String id) {
-        ResourceEntity resourceEntity = resourceRepositories.getResourceEntityById(id)
-                .orElseThrow();
-        return mapper.toModel(resourceEntity);
+        return mapper.toModel(resourceRepositories.getReferenceById(id));
     }
 
     @Override
@@ -35,44 +32,7 @@ public class JPAResourceProvider implements ResourceProvider {
     }
 
     @Override
-    public List<ResourceModel> getResourceByApplicationName(String applicationName) {
-        return resourceRepositories.getResourceEntitiesByApplicationsName(applicationName)
-                .stream()
-                .map(mapper::toModel)
-                .collect(Collectors.toList());
-    }
-
-  /*  @Override
-    public ResourceModel getResourceByCurrentValue(String currentValue) {
-        ResourceEntity resourceEntity = resourceRepositories.getResourceEntityByCurrentValueId(currentValue)
-                .orElseThrow();
-
-        return mapper.toModel(resourceEntity);
-    }
-
-    @Override
-    public ResourceModel getResourceByValue(String value) {
-        ResourceEntity resourceEntity = resourceRepositories.getResourceEntityByValueId(value)
-                .orElseThrow();
-        return mapper.toModel(resourceEntity);
-    }*/
-
-    @Override
     public ResourceModel save(ResourceModel resourceModel) {
-        ResourceEntity resourceEntity = mapper.toEntity(resourceModel);
-        if (resourceModel.getId() != null) {
-            throw new RuntimeException("Only new resource. Current resource has id " + resourceModel.getId());
-        }
-        resourceEntity.setId(UUID.randomUUID().toString());
-        return mapper.toModel(resourceRepositories.save(resourceEntity));
-    }
-
-    @Override
-    public void update(ResourceModel resourceModel) {
-        if (resourceModel.getId() == null) {
-            throw new RuntimeException("Only existing model. Current model doesn't have id.");
-        }
-        resourceRepositories.save(mapper.toEntity(resourceModel));
-
+        return mapper.toModel(resourceRepositories.save(mapper.toEntity(resourceModel)));
     }
 }

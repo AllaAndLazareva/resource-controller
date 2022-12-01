@@ -6,7 +6,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,41 +27,17 @@ public class ResourceEntity {
     @Column(name = "id", unique = true)
     private String id;
 
-    /**
-     * Ключ к параметру не может быть пустым
-     * пример: reg_rec_host
-     * По данному ключу будет выполниться запрос и получения параметра.
-     */
-    @Column(name = "resource_key")    //1.пользователь вводит ключ
+    @Column(name = "resource_key")
     @NotNull
     private String key;
 
-    /**
-     * Скорее всего это го поля здесь не должно быть. Связь будет через кросс таблицу.
-     */
     @ManyToMany(mappedBy = "resources")
     @ToString.Exclude
     private List<ApplicationEntity> applications;
 
-    /**
-     * Поля хранящее список версий и значение параметра
-     * Принцип такой:
-     * 1)Когда пользователь будет создавать параметр с ключом reg_rec_host и значением localHost:8080 ему присвоиться версия 1.0
-     * и засетится в поля currentValue все приложения которым нужен параметр reg_rec_host будут получать его из поля currentValue (localHost:8080)
-     * Если пользователь зайдет и поменяет параметр reg_rec_host на localHost:999999 то будет создан новый reg_rec_host с версией 1.1 засетится в currentValue все приложения начнут получать localHost:999999
-     * но мы всегда сможем переключить на версию 1.0. т.к она не удаляется, а хранится в списке.
-     */
-    @Column
     @ToString.Exclude
-    //@OneToMany(mappedBy = "resource")
-   //private List<VersionDataEntity> value;
-    private String versionDataValue;            //Здесь должна быть коллекция, но компилятор не принимает её
-
-   // @OneToOne
-    @ToString.Exclude
-    //@JoinColumn(name = "current_value", referencedColumnName = "id")
-   //private VersionDataEntity currentValue;
-    private String VersionDataCurrentValue;
+    @Column(name = "current_value")
+    private String currentValue;
 
     @Override
     public boolean equals(Object o) {
@@ -74,5 +50,24 @@ public class ResourceEntity {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public boolean containsApplication(String id) {
+        return applications != null && applications
+                .stream()
+                .anyMatch(applicationEntity -> applicationEntity.getId().equals(id));
+    }
+
+    public void addApplications(ApplicationEntity applicationEntity) {
+        applicationEntity.addResource(this);
+        if (applications != null) {
+            applications.add(applicationEntity);
+        } else {
+            applications = Arrays.asList(applicationEntity);
+        }
+    }
+
+    public void setApplications(List<ApplicationEntity> applications) {
+        applications.forEach(this::addApplications);
     }
 }

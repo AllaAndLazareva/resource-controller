@@ -20,33 +20,13 @@ public class ResourceController {
         return ResponseEntity.ok(resourceProvider.getResourceById(id));
     }
 
-    @GetMapping("/appId/{appId}")
+    @GetMapping(value = "/app/{appId}", produces = {"application/json"})
     public ResponseEntity<List<ResourceModel>> getResourceByApplicationId(@PathVariable("appId") String applicationId) {
         return ResponseEntity.ok(resourceProvider.getResourceByApplicationId(applicationId));
     }
 
-    @GetMapping("/appName/{appName}")
-    public ResponseEntity<List<ResourceModel>> getResourceByApplicationName(@PathVariable("appName") String applicationName) {
-        return ResponseEntity.ok(resourceProvider.getResourceByApplicationName(applicationName));
-    }
-
- /*   @GetMapping("/current/{current}")
-    public ResponseEntity<ResourceModel> getResourceByCurrentValue(@PathVariable("current") String currentValue) {
-        return ResponseEntity.ok(resourceProvider.getResourceByCurrentValue(currentValue));
-    }
-
-    @GetMapping("/value/{value}")
-    public ResponseEntity<ResourceModel> getResourceByValue(@PathVariable("value") String value) {
-        return ResponseEntity.ok(resourceProvider.getResourceByValue(value));
-    }
-*/
     @PostMapping
     public ResponseEntity<ResourceModel> save(@RequestBody ResourceModel resourceModel) {
         return ResponseEntity.ok(resourceProvider.save(resourceModel));
-    }
-
-    @PatchMapping
-    public void update(@RequestBody ResourceModel resourceModel) {
-        resourceProvider.update(resourceModel);
     }
 }

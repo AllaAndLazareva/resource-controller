@@ -1,10 +1,15 @@
 package com.lazareva.resourceController.jpa.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,5 +61,13 @@ public class ApplicationEntity {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public void addResource(ResourceEntity resourceEntity) {
+        if (resources != null) {
+            resources.add(resourceEntity);
+        } else {
+            resources = Arrays.asList(resourceEntity);
+        }
     }
 }

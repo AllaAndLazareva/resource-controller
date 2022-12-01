@@ -10,8 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ApplicationRepositories extends JpaRepository<ApplicationEntity, String> {
-
-    @EntityGraph(attributePaths = {"resources.currentValue"})
     List<ApplicationEntity> findApplicationEntitiesByRealmId(String realmId);
 
 }
