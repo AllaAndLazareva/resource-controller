@@ -11,8 +11,7 @@ import java.util.List;
 public class ResourceModel implements Serializable {
 
     private String id;
-    private String applicationId;
-    private String versionDataId;
+    private List<String> applicationIds;
     private String resourceKey;
     private String resourceValue;
 }

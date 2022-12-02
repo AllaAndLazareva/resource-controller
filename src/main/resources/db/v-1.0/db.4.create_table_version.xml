@@ -8,9 +8,10 @@
 
     <changeSet id="create-table-version" author="Lazareva">
         <createTable tableName="version">
-            <column name="version_id" type="varchar(64)">
+            <column name="id" type="varchar(64)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
+            <column name="version" type="varchar(64)"/>
             <column name="description" type="varchar(64)"/>
         </createTable>
     </changeSet>

@@ -13,4 +13,5 @@
     <include file="db/v-1.0/db.7.create_table_application_resource.xml"/>
     <include file="db/v-1.0/db.8.create_table_resource_version_data.xml"/>
 
+
 </databaseChangeLog>

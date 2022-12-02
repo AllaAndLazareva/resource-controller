@@ -7,14 +7,12 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 
-/**
- * Класс описывающий конфигурации конкретное приложение
- * Пример: Экономическое судопроизводство
- */
+
 @Entity
 @Table(name = "application")
 @NoArgsConstructor
@@ -62,5 +60,13 @@ public class ApplicationEntity {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37).append(getId()).toHashCode();
+    }
+
+    public void addResource(ResourceEntity resourceEntity) {
+        if (resources != null) {
+            resources.add(resourceEntity);
+        } else {
+            resources = Arrays.asList(resourceEntity);
+        }
     }
 }
